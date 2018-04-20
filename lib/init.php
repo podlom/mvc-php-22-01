@@ -20,3 +20,8 @@ function devionityAutoload($class_name)
 spl_autoload_register('devionityAutoload');
 
 require_once(ROOT.DS.'config'.DS.'config.php');
+
+function __($key, $default_value = '')
+{
+    return Lang::get($key, $default_value);
+}
