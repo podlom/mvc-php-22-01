@@ -47,4 +47,10 @@ class Contact extends Model
             return $this->db->query($sql);
         }
     }
+
+    public function getList()
+    {
+        $sql = "select * from messages where 1 order by id desc";
+        return $this->db->query($sql);
+    }
 }

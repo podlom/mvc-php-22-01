@@ -11,9 +11,16 @@ class ContactsController extends Controller
     public function index()
     {
         if (!empty($_POST)) {
-            $this->model->save($_POST);
+            if ($this->model->save($_POST)) {
+                Session::setFlash('Thank you! Your message was sent successfully!');
+            }
         }
 
         echo $this->model->getErrors();
+    }
+
+    public function admin_index()
+    {
+        $this->data = $this->model->getList();
     }
 }

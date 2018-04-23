@@ -17,4 +17,54 @@ class Page extends Model{
         return isset($result[0]) ? $result[0] : null;
     }
 
+    public function getById($id){
+        $id = (int)$id;
+        $sql = "select * from pages where id = '{$id}' limit 1";
+        $result = $this->db->query($sql);
+        return isset($result[0]) ? $result[0] : null;
+    }
+
+    public function save($data, $id = null)
+    {
+        if (empty($data['alias']) || empty($data['title']) || empty($data['content']))
+        {
+            return false;
+        }
+
+        $id = (int)$id;
+        $alias = $this->db->escape($data['alias']);
+        $title = $this->db->escape($data['title']);
+        $content = $this->db->escape($data['content']);
+        $is_published = !empty($data['is_published']) ? 1 : 0;
+
+        if ( !$id ){ // Add new record
+            $sql = "
+                insert into pages
+                   set alias = '{$alias}',
+                       title = '{$title}',
+                       content = '{$content}',
+                       is_published = {$is_published}
+            ";
+        } else { // Update existing record
+            $sql = "
+                update pages
+                   set alias = '{$alias}',
+                       title = '{$title}',
+                       content = '{$content}',
+                       is_published = {$is_published}
+                   where id = {$id}
+            ";
+        }
+
+        // die('SQL: ' . $sql);
+
+        return $this->db->query($sql);
+    }
+
+    public function delete($id){
+        $id = (int)$id;
+        $sql = "delete from pages where id = '{$id}' limit 1";
+        return $this->db->query($sql);
+    }
+
 }
