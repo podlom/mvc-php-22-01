@@ -24,10 +24,8 @@ class Page extends Model{
         return isset($result[0]) ? $result[0] : null;
     }
 
-    public function save($data, $id = null)
-    {
-        if (empty($data['alias']) || empty($data['title']) || empty($data['content']))
-        {
+    public function save($data, $id = null){
+        if ( !isset($data['alias']) || !isset($data['title']) || !isset($data['content']) ){
             return false;
         }
 
@@ -35,7 +33,7 @@ class Page extends Model{
         $alias = $this->db->escape($data['alias']);
         $title = $this->db->escape($data['title']);
         $content = $this->db->escape($data['content']);
-        $is_published = !empty($data['is_published']) ? 1 : 0;
+        $is_published = isset($data['is_published']) ? 1 : 0;
 
         if ( !$id ){ // Add new record
             $sql = "
@@ -56,14 +54,12 @@ class Page extends Model{
             ";
         }
 
-        // die('SQL: ' . $sql);
-
         return $this->db->query($sql);
     }
 
     public function delete($id){
         $id = (int)$id;
-        $sql = "delete from pages where id = '{$id}' limit 1";
+        $sql = "delete from pages where id = {$id}";
         return $this->db->query($sql);
     }
 

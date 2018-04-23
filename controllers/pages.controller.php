@@ -24,17 +24,13 @@ class PagesController extends Controller{
         $this->data['pages'] = $this->model->getList();
     }
 
-    public function admin_add()
-    {
-        if ( $_POST )
-        {
-            // die('<pre>' . print_r($_POST, 1) . '</pre>');
-
+    public function admin_add(){
+        if ( $_POST ){
             $result = $this->model->save($_POST);
             if ( $result ){
                 Session::setFlash('Page was saved.');
             } else {
-                Session::setFlash('Error saving page.');
+                Session::setFlash('Error.');
             }
             Router::redirect('/admin/pages/');
         }

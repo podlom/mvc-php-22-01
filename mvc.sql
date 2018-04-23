@@ -1,10 +1,8 @@
--- CREATE DATABASE  IF NOT EXISTS `mvc` /*!40100 DEFAULT CHARACTER SET latin1 */;
--- USE `mvc`;
--- MySQL dump 10.13  Distrib 5.6.13, for Win32 (x86)
+-- MySQL dump 10.13  Distrib 5.7.19, for Win64 (x86_64)
 --
--- Host: 127.0.0.1    Database: mvc
+-- Host: localhost    Database: mvc1db
 -- ------------------------------------------------------
--- Server version	5.6.21
+-- Server version	5.7.19-log
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -30,7 +28,7 @@ CREATE TABLE `messages` (
   `email` varchar(100) NOT NULL,
   `message` text,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -39,8 +37,36 @@ CREATE TABLE `messages` (
 
 LOCK TABLES `messages` WRITE;
 /*!40000 ALTER TABLE `messages` DISABLE KEYS */;
-INSERT INTO `messages` VALUES (1,'Test','test@test.com','Test message');
+INSERT INTO `messages` VALUES (1,'Test','test@test.com','Test message'),(3,'Taras','taras@shkodenko.com','Test message test alert(1);');
 /*!40000 ALTER TABLE `messages` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `news`
+--
+
+DROP TABLE IF EXISTS `news`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `news` (
+  `id` tinyint(3) unsigned NOT NULL AUTO_INCREMENT,
+  `alias` varchar(100) NOT NULL,
+  `title` varchar(100) NOT NULL,
+  `content` text,
+  `pub_date` date NOT NULL,
+  `source` varchar(255) NOT NULL,
+  `is_published` tinyint(1) unsigned DEFAULT '0',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `news`
+--
+
+LOCK TABLES `news` WRITE;
+/*!40000 ALTER TABLE `news` DISABLE KEYS */;
+/*!40000 ALTER TABLE `news` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -57,7 +83,7 @@ CREATE TABLE `pages` (
   `content` text,
   `is_published` tinyint(1) unsigned DEFAULT '0',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -66,7 +92,7 @@ CREATE TABLE `pages` (
 
 LOCK TABLES `pages` WRITE;
 /*!40000 ALTER TABLE `pages` DISABLE KEYS */;
-INSERT INTO `pages` VALUES (1,'about','About Us','Test content',1);
+INSERT INTO `pages` VALUES (1,'about','About Us','<p>About us page test content goes here...</p>\r\n<p>One more line of text</p>',1),(2,'our-history','Our History','<p>Lorem Ivo Bobul ipsum dolor sit amen: our history.</p>\r\n<img src=\"/img/ivo-bobul.jpg\" width=\"440\" alt=\"Ivo Bobul for ever!\">',1);
 /*!40000 ALTER TABLE `pages` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -107,4 +133,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2015-03-08 21:37:12
+-- Dump completed on 2018-04-23 20:23:29

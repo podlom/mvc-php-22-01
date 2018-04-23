@@ -119,8 +119,13 @@ class Router{
 
     }
 
-    public static function redirect($location){
-        header("Location: $location");
+    public static function redirect($location)
+    {
+        if (headers_sent()) {
+            echo '<meta http-equiv="refresh" content="0;url=' . $location . '">';
+        } else {
+            header("Location: $location");
+        }
     }
 
 }
